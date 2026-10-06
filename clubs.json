@@ -1,0 +1,155 @@
+[
+ {
+  "slug": "padel-social-club-earls-court",
+  "name": "Padel Social Earls Court",
+  "area": "SW6",
+  "default": true
+ },
+ {
+  "slug": "rocks-lane-chiswick",
+  "name": "Rocks Lane Chiswick",
+  "area": "W4",
+  "default": true
+ },
+ {
+  "slug": "rocks-lane-barnes-london",
+  "name": "Rocks Lane Barnes",
+  "area": "SW13",
+  "default": true
+ },
+ {
+  "slug": "bannatyne-grove-park",
+  "name": "Bannatyne Grove Park",
+  "area": "SE12"
+ },
+ {
+  "slug": "barn-elms-sports-centre",
+  "name": "Barn Elms Sports Centre",
+  "area": "SW13"
+ },
+ {
+  "slug": "battersea-park-millennium-arena",
+  "name": "Battersea Park Millennium Arena",
+  "area": "SW11"
+ },
+ {
+  "slug": "catford-padel-collective",
+  "name": "Catford Padel Collective",
+  "area": "SE6"
+ },
+ {
+  "slug": "cw-padel-club",
+  "name": "CW Padel Club",
+  "area": "BR7"
+ },
+ {
+  "slug": "georgians-padel",
+  "name": "Georgians Padel",
+  "area": "N8"
+ },
+ {
+  "slug": "padel-and-coffee",
+  "name": "Padel and Coffee",
+  "area": "UB6"
+ },
+ {
+  "slug": "padel-box-bermondsey",
+  "name": "Padel Box Bermondsey",
+  "area": "SE15"
+ },
+ {
+  "slug": "padel-padel-eltham",
+  "name": "¡Padel Padel! Eltham",
+  "area": "SE9"
+ },
+ {
+  "slug": "padel-pals",
+  "name": "Padel Pals Sydenham",
+  "area": "SE26"
+ },
+ {
+  "slug": "padel-people-wimbledon",
+  "name": "Padel People Wimbledon",
+  "area": "SW17"
+ },
+ {
+  "slug": "padel-play-london",
+  "name": "Padel Play London",
+  "area": "N4"
+ },
+ {
+  "slug": "padel-social-club-paddington",
+  "name": "Padel Social Paddington",
+  "area": "W2"
+ },
+ {
+  "slug": "padel-social-club-the-o2",
+  "name": "Padel Social The O2",
+  "area": "SE10"
+ },
+ {
+  "slug": "padel-tree-finchley",
+  "name": "Padel Tree Finchley",
+  "area": "N12"
+ },
+ {
+  "slug": "padel-united-willesden",
+  "name": "Padel United Willesden",
+  "area": "NW10"
+ },
+ {
+  "slug": "padel-zest",
+  "name": "Padel Zest",
+  "area": "SW19"
+ },
+ {
+  "slug": "the-padel-hub-n20-north-london",
+  "name": "PadelHub N20",
+  "area": "N20"
+ },
+ {
+  "slug": "powerleague-mill-hill",
+  "name": "Powerleague Mill Hill",
+  "area": "NW7"
+ },
+ {
+  "slug": "powerleague-shoreditch",
+  "name": "Powerleague Shoreditch",
+  "area": "E1"
+ },
+ {
+  "slug": "racketeer",
+  "name": "Racketeer",
+  "area": "NW10"
+ },
+ {
+  "slug": "rocks-lane-dyrham-park-country-club",
+  "name": "Rocks Lane Dyrham Park",
+  "area": "EN5"
+ },
+ {
+  "slug": "s3-finchley-rd",
+  "name": "S3 Padel Finchley Road",
+  "area": "NW3"
+ },
+ {
+  "slug": "s3-padel-sutton",
+  "name": "S3 Padel Sutton",
+  "area": "Sutton"
+ },
+ {
+  "slug": "social-sports-wembley",
+  "name": "S3 Padel Wembley",
+  "area": "HA9"
+ },
+ {
+  "slug": "the-108",
+  "name": "The 108",
+  "area": "NW2"
+ },
+ {
+  "slug": "the-hive-london",
+  "name": "The Hive London",
+  "area": "Edgware"
+ }
+]

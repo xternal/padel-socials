@@ -1,0 +1,27 @@
+# Padel Socials
+
+> A free, self-hosted web page that shows every padel social, americano and group class with a free place at the London Playtomic clubs you choose, sorted by time. Each copy is private to the person who deploys it.
+
+Made by Pavel Guzhikov (https://guzh.uk). Code: https://github.com/xternal/padel-socials (MIT licence). Not affiliated with Playtomic.
+
+## What it does
+
+- Lists padel socials, americanos, tournaments and public group classes that still have places, at up to 8 of 30 London Playtomic clubs at a time (for example Padel Social Club Earls Court, Rocks Lane Chiswick, Rocks Lane Barnes, Padel Zest, Padel Play London, S3 Padel).
+- Shows date, time, length, level range, places taken out of the total, coach and price, with the next open spot at the top.
+- Filters by socials or classes, club and your Playtomic level. Each event links to its Playtomic page, where you book.
+- Data comes from Playtomic's public club pages and is at most five minutes old.
+
+## How to get your own copy
+
+1. Open https://padel-socials.vercel.app/ or https://github.com/xternal/padel-socials and use "Deploy your own copy" (Deploy to Vercel). Free GitHub and Vercel accounts are enough.
+2. When Vercel asks for PADEL_KEY, make up a long password.
+3. Open your new site and type that password once. Choose your clubs and level.
+
+Each copy is for its owner's personal, non-commercial use, as Playtomic's terms allow. It does not book anything.
+
+## Links
+
+- Live example and setup help: https://padel-socials.vercel.app/
+- Source and instructions: https://github.com/xternal/padel-socials
+- Contact: ideas@guzh.uk
+- Support the project: https://ko-fi.com/pavelg

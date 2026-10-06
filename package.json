@@ -1,0 +1,6 @@
+{
+  "name": "padel-socials",
+  "private": true,
+  "type": "module",
+  "description": "Your own private feed of London padel socials, americanos and classes with free places on Playtomic. Deploy free on Vercel."
+}

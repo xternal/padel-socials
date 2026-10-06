@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Padel Socials · London padel socials, americanos and classes with free places</title>
+<meta name="description" content="Your own private feed of padel socials, americanos and group classes with free places at London Playtomic clubs. Pick your clubs and level, see every open spot at a glance. Free to deploy on Vercel.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://padel-socials.vercel.app/">
+<meta name="author" content="Pavel Guzhikov">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Padel Socials">
+<meta property="og:title" content="Padel Socials · every London padel social with a free place">
+<meta property="og:description" content="Padel socials, americanos and classes with free places at up to 8 London Playtomic clubs, in one private feed. Get your own copy free in 5 minutes.">
+<meta property="og:url" content="https://padel-socials.vercel.app/">
+<meta property="og:image" content="https://padel-socials.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Padel Socials: London padel socials and classes with free places">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Padel Socials · every London padel social with a free place">
+<meta name="twitter:description" content="Your own private feed of padel socials, americanos and classes with free places at London Playtomic clubs.">
+<meta name="twitter:image" content="https://padel-socials.vercel.app/og.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://padel-socials.vercel.app/#app",
+      "name": "Padel Socials",
+      "url": "https://padel-socials.vercel.app/",
+      "description": "A private, self-hosted feed of padel socials, americanos and group classes with free places at London Playtomic clubs. Pick up to 8 clubs, filter by level, and open the event in Playtomic to book.",
+      "applicationCategory": "SportsApplication",
+      "operatingSystem": "Any (web browser)",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
+      "areaServed": { "@type": "City", "name": "London" },
+      "about": [{ "@type": "Thing", "name": "Padel" }, { "@type": "Thing", "name": "Americano (padel format)" }],
+      "author": { "@id": "https://guzh.uk/#person" },
+      "codeRepository": "https://github.com/xternal/padel-socials",
+      "license": "https://opensource.org/licenses/MIT"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://guzh.uk/#person",
+      "name": "Pavel Guzhikov",
+      "url": "https://guzh.uk",
+      "email": "ideas@guzh.uk"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is Padel Socials?", "acceptedAnswer": { "@type": "Answer", "text": "A one-page feed of padel socials, americanos and group classes that still have free places at the London Playtomic clubs you choose, sorted by time, with level, price and a link to book in Playtomic." } },
+        { "@type": "Question", "name": "How do I get my own Padel Socials?", "acceptedAnswer": { "@type": "Answer", "text": "Use the Deploy to Vercel button on padel-socials.vercel.app or github.com/xternal/padel-socials, sign in with GitHub, make up a password for PADEL_KEY, then open your new site and type that password once. It is free and takes about five minutes." } },
+        { "@type": "Question", "name": "Which clubs does it cover?", "acceptedAnswer": { "@type": "Answer", "text": "The 30 London clubs listed on Playtomic, including Padel Social Club Earls Court, Rocks Lane Chiswick and Barnes, Padel Zest, Padel Play London and S3 Padel. You pick up to 8 at a time." } },
+        { "@type": "Question", "name": "Does it book for me?", "acceptedAnswer": { "@type": "Answer", "text": "No. It only shows what has free places. Each event links to its Playtomic page, where you book as usual." } },
+        { "@type": "Question", "name": "Is it affiliated with Playtomic?", "acceptedAnswer": { "@type": "Answer", "text": "No. Each copy reads Playtomic's public club pages for its owner's personal, non-commercial use." } }
+      ]
+    }
+  ]
+}
+</script>
+<meta name="theme-color" content="#EEF2F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C151E" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%23DDF24B'/%3E%3Cpath d='M6 9c6 3 6 11 0 14M26 9c-6 3-6 11 0 14' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Saira+Condensed:wght@500;600;700&display=swap">
+<script>/* apply the saved theme before first paint */try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<style>
+/* Layout: the same court-side scoreboard as Where to Padel. Next open spot, filters, then one ruled list per day. */
+:root {
+  --bg: #EEF2F5; --surface: #FFFFFF; --ink: #102131; --muted: #586A7A; --line: #D5DEE5;
+  --accent: #1B5DA6; --accent-ink: #FFFFFF; --ball: #DDF24B; --ball-ink: #1A2600;
+  --open: #17804A; --last: #B25D06; --bar-off: #D3DBE2; --warn: #A63A1B; --social: #6B3FA0;
+  --display: "Saira Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0C151E; --surface: #13202B; --ink: #E4ECF2; --muted: #93A4B3; --line: #233342;
+  --accent: #6EA6EC; --accent-ink: #0C151E; --ball: #D6EE48; --ball-ink: #1A2600;
+  --open: #4CC483; --last: #F0A247; --bar-off: #2A3A49; --warn: #F08A6A; --social: #B794E6; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0C151E; --surface: #13202B; --ink: #E4ECF2; --muted: #93A4B3; --line: #233342;
+  --accent: #6EA6EC; --accent-ink: #0C151E; --ball: #D6EE48; --ball-ink: #1A2600;
+  --open: #4CC483; --last: #F0A247; --bar-off: #2A3A49; --warn: #F08A6A; --social: #B794E6; color-scheme: dark }
+
+* { box-sizing: border-box; }
+html { padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 var(--body); -webkit-text-size-adjust: 100%; }
+[hidden] { display: none !important; }
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 48px; display: grid; gap: 18px; }
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+.corner { display: flex; align-items: center; gap: 12px; }
+.by { font-size: .82rem; color: var(--muted); text-decoration: none; }
+.by b { color: var(--ink); font-weight: 600; }
+.by:hover b { text-decoration: underline; text-underline-offset: 2px; }
+.picker { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 14px 16px; display: grid; gap: 12px; }
+.picker h2 { font: 700 1.1rem/1.2 var(--display); text-transform: uppercase; letter-spacing: .05em; margin: 0; }
+.picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 2px 16px; }
+.picks label { display: flex; gap: 8px; align-items: baseline; padding: 5px 0; cursor: pointer; min-width: 0; }
+.picks input { flex: none; accent-color: var(--accent); }
+.picks small { color: var(--muted); }
+.picks label.off { opacity: .45; cursor: default; }
+.picker .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.picker .count { color: var(--muted); font-size: .84rem; }
+.coffee { justify-self: start; display: inline-flex; align-items: center; gap: 6px; background: var(--ball); color: var(--ball-ink) !important;
+  border-radius: 999px; padding: 6px 13px; font-weight: 600; font-size: .85rem; text-decoration: none; }
+.coffee:hover { filter: brightness(.96); }
+.coffee.big { font-size: 1.1rem; padding: 12px 22px; box-shadow: 0 2px 0 color-mix(in srgb, var(--ball-ink) 25%, transparent); }
+.help { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 18px 18px 20px; display: grid; gap: 14px; }
+.help h2 { font: 700 1.5rem/1.1 var(--display); margin: 0; text-wrap: balance; }
+.help h3 { font: 700 1.05rem/1.2 var(--display); text-transform: uppercase; letter-spacing: .05em; margin: 4px 0 0; }
+.help p { margin: 0; max-width: 62ch; }
+.help ol { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; max-width: 62ch; }
+.help code { font-size: .9em; background: color-mix(in srgb, var(--accent) 12%, transparent); padding: 1px 5px; border-radius: 4px; }
+.help .cta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.deploy { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: var(--bg) !important; border-radius: 999px;
+  padding: 12px 20px; font-weight: 600; font-size: 1.05rem; text-decoration: none; }
+.deploy:hover { filter: brightness(1.1); }
+.help dl { margin: 0; display: grid; gap: 10px; max-width: 62ch; }
+.help dt { font-weight: 600; }
+.help dd { margin: 0; color: var(--muted); }
+.small { color: var(--muted); font-size: .82rem; }
+.theme { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+.theme button { display: grid; place-items: center; width: 30px; height: 26px; padding: 0; border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer; }
+.theme button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.theme svg { width: 15px; height: 15px; }
+h1 { font: 700 2.4rem/1 var(--display); margin: 0; }
+.sub { color: var(--muted); margin: 6px 0 0; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 8px 12px; font-weight: 500; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.small { border-radius: 999px; padding: 3px 10px; font-size: .8rem; }
+.btn:disabled { opacity: .5; cursor: default; }
+.lock { display: flex; flex-wrap: wrap; gap: 8px; }
+.lock input { flex: 1 1 200px; min-width: 0; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.status { display: flex; align-items: center; gap: 8px; font-size: .84rem; color: var(--muted); flex-wrap: wrap; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex: none; }
+.status.live .dot { background: var(--open); }
+.status.err { color: var(--warn); } .status.err .dot { background: var(--warn); }
+
+.next { background: var(--ball); color: var(--ball-ink); border-radius: 10px; padding: 14px 16px;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; align-items: center; }
+.next .when { font: 700 2rem/1 var(--display); font-variant-numeric: tabular-nums; grid-row: span 2; }
+.next .eyebrow { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; opacity: .75; }
+.next .what { font-weight: 600; }
+.next a { color: inherit; }
+.next.none { background: var(--surface); color: var(--muted); border: 1px solid var(--line); display: block; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.group { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.group > span { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-right: 4px; }
+.chip { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 11px; font-size: .85rem; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.lvl { width: 4.5em; padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); text-align: center; }
+
+.daysec { display: grid; }
+.daysec h2 { font: 700 1.25rem/1.2 var(--display); text-transform: uppercase; letter-spacing: .05em; margin: 0;
+  padding: 8px 0 6px; border-bottom: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: baseline;
+  position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 1; }
+.daysec h2 small { font: 500 .8rem var(--body); text-transform: none; letter-spacing: 0; color: var(--muted); }
+.row { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 4px 14px; padding: 11px 0; border-bottom: 1px solid var(--line); align-items: start; }
+.time { font: 600 1.45rem/1 var(--display); font-variant-numeric: tabular-nums; }
+.time small { display: block; font: 500 .74rem/1.4 var(--body); color: var(--muted); margin-top: 3px; }
+.info { min-width: 0; }
+.name { font-weight: 600; overflow-wrap: anywhere; }
+.name a { color: inherit; text-decoration: none; } .name a:hover { text-decoration: underline; }
+.meta { color: var(--muted); font-size: .84rem; display: flex; flex-wrap: wrap; gap: 2px 10px; margin-top: 2px; }
+.meta a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.kind { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; border-radius: 4px; padding: 1px 5px; border: 1px solid currentColor; }
+.kind.social { color: var(--social); } .kind.class { color: var(--accent); }
+.spaces { text-align: right; display: grid; gap: 6px; justify-items: end; }
+.pill { font: 600 .82rem/1 var(--body); padding: 5px 9px; border-radius: 999px; white-space: nowrap; }
+.pill.open { background: color-mix(in srgb, var(--open) 16%, transparent); color: var(--open); }
+.pill.last { background: color-mix(in srgb, var(--last) 18%, transparent); color: var(--last); }
+.bar { width: 72px; height: 6px; border-radius: 3px; background: var(--bar-off); overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--muted); }
+.price { font-size: .84rem; font-weight: 600; }
+.empty { color: var(--muted); padding: 18px 0; margin: 0; }
+footer { color: var(--muted); font-size: .8rem; display: grid; gap: 6px; max-width: 68ch; }
+footer p { margin: 0; }
+@media (max-width: 520px) {
+  h1 { font-size: 2rem; }
+  .row { grid-template-columns: 54px minmax(0, 1fr); }
+  .spaces { grid-column: 2; justify-items: start; text-align: left; display: flex; gap: 10px; align-items: center; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="top">
+      <h1>Padel Socials</h1>
+      <div class="corner">
+      <a class="by" href="https://guzh.uk" target="_blank" rel="noopener">Made by <b>Pavel Guzhikov</b></a>
+      <div class="theme" id="theme" role="group" aria-label="Colour theme">
+        <button type="button" data-t="auto" aria-label="Automatic: follow the phone's setting" title="Automatic: follow the phone's setting"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg></button>
+        <button type="button" data-t="light" aria-label="Light" title="Light"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="currentColor"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.4 1.4M11.55 11.55l1.4 1.4M3.05 12.95l1.4-1.4M11.55 4.45l1.4-1.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <button type="button" data-t="dark" aria-label="Dark" title="Dark"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 9.7A5.75 5.75 0 0 1 6.3 2.5a5.75 5.75 0 1 0 7.2 7.2z" fill="currentColor"/></svg></button>
+      </div>
+      </div>
+    </div>
+    <p class="sub" id="sub">Socials and classes with places at London Playtomic clubs you choose.</p>
+  </header>
+
+  <form class="lock" id="lock" hidden>
+    <label for="key" hidden>Key</label>
+    <input id="key" type="password" placeholder="Your key" autocomplete="current-password">
+    <button class="btn primary" type="submit">Open</button>
+  </form>
+
+  <section class="help" id="help" aria-labelledby="help-title">
+    <h2 id="help-title">Get your own Padel Socials</h2>
+    <p>Padel Socials shows every padel social, americano and group class that still has a free place at the London Playtomic clubs you choose, on one page, sorted by time. Each copy is private to the person who sets it up. It's free and takes about five minutes.</p>
+    <ol>
+      <li>Tap <b>Deploy your own copy</b> and sign in to Vercel with GitHub. Both are free.</li>
+      <li id="your-key">When Vercel asks for <code>PADEL_KEY</code>, make up a long password. That's your key.</li>
+      <li>When the deploy finishes, open your new site and type your key once. Your phone remembers it.</li>
+      <li>Choose your clubs and level, and add the page to your home screen.</li>
+    </ol>
+    <div class="cta">
+      <a class="deploy" href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fxternal%2Fpadel-socials&project-name=padel-socials&repository-name=padel-socials&env=PADEL_KEY&envDescription=Make%20up%20a%20long%20password.%20You%20type%20it%20once%20on%20your%20phone%20to%20open%20your%20feed.&envLink=https%3A%2F%2Fgithub.com%2Fxternal%2Fpadel-socials%23your-key" target="_blank" rel="noopener"><span aria-hidden="true">▲</span> Deploy your own copy</a>
+      <a class="coffee big" href="https://ko-fi.com/pavelg" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+    </div>
+    <h3>Questions</h3>
+    <dl>
+      <dt>Which clubs does it cover?</dt>
+      <dd>The 30 London clubs on Playtomic, from Padel Social Club Earls Court and Rocks Lane Chiswick to Padel Zest, Padel Play London and S3 Padel. Pick up to 8 at a time.</dd>
+      <dt>Does it book for me?</dt>
+      <dd>No. It shows what has free places; each event opens in Playtomic, where you book as usual.</dd>
+      <dt>Why do I need my own copy?</dt>
+      <dd>Playtomic's terms allow personal, non-commercial use. Your copy reads their public club pages for you alone, so keep its link to yourself.</dd>
+      <dt>Where's the code?</dt>
+      <dd><a href="https://github.com/xternal/padel-socials">github.com/xternal/padel-socials</a>, free to use under the MIT licence. Ideas or problems: <a href="mailto:ideas@guzh.uk">ideas@guzh.uk</a>.</dd>
+    </dl>
+    <p class="small">Not affiliated with Playtomic.</p>
+  </section>
+
+  <div class="status" id="status" aria-live="polite"><span class="dot"></span><span id="statusText">Loading…</span></div>
+  <section class="next none" id="next">Loading sessions…</section>
+
+  <section class="filters" aria-label="Filters" id="filters">
+    <div class="group" id="fKind"><span>Show</span>
+      <button class="chip" type="button" data-v="all">Both</button>
+      <button class="chip" type="button" data-v="social">Socials</button>
+      <button class="chip" type="button" data-v="class">Classes</button>
+    </div>
+    <div class="group"><span>Clubs</span><button class="chip" type="button" id="pick" aria-expanded="false" aria-controls="picker">Choose clubs</button></div>
+    <div class="group" id="fClub"></div>
+    <div class="group"><span><label for="myLevel">My level</label></span>
+      <input class="lvl" id="myLevel" type="number" inputmode="decimal" min="0" max="7" step="0.1" placeholder="any">
+    </div>
+  </section>
+
+  <section class="picker" id="picker" hidden aria-label="Choose clubs">
+    <h2>Choose up to 8 clubs</h2>
+    <div class="picks" id="picks"></div>
+    <div class="actions">
+      <button class="btn primary" type="button" id="pickApply">Show these clubs</button>
+      <button class="btn" type="button" id="pickCancel">Cancel</button>
+      <span class="count" id="pickCount"></span>
+    </div>
+  </section>
+
+  <main id="list"></main>
+
+  <footer>
+    <p>Read from Playtomic's public club pages for personal use. Places can go fast: book in the Playtomic app. Full events aren't listed by Playtomic, so everything here has at least one place.</p>
+    <p>Want this for yourself? <a href="#help" id="showHelp">Get your own copy</a>, free. Ideas or problems: <a href="mailto:ideas@guzh.uk">ideas@guzh.uk</a></p>
+    <a class="coffee big" href="https://ko-fi.com/pavelg" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const KEY = 'padel-socials';
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const saved = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } })();
+  const st = Object.assign({ kind: 'all', clubs: [], level: '', key: '', picked: [] }, saved);
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
+  let data = null, lock = false, helpAsked = location.hash === '#help';
+
+  const ukNow = () => {
+    const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit',
+      day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZoneName: 'short' }).formatToParts(new Date()).map(x => [x.type, x.value]));
+    return { stamp: `${p.year}-${p.month}-${p.day} ${p.hour}:${p.minute}`, date: `${p.year}-${p.month}-${p.day}`, hm: `${p.hour}:${p.minute}`, zone: p.timeZoneName };
+  };
+  const dayName = (d, opt) => new Date(d + 'T12:00:00Z').toLocaleDateString('en-GB', { timeZone: 'UTC', ...opt });
+  const areaOf = name => (data?.clubs || []).find(c => c.name === name)?.area || 'London';
+  const dirUrl = club => `https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=${encodeURIComponent(club + ', ' + areaOf(club))}`;
+  function places(r) { const left = r.x - r.b; return left <= 1 ? { k: 'last', label: 'Last place' } : { k: 'open', label: `${left} places` }; }
+  function fits(r) {
+    if (st.kind !== 'all' && r.kind !== st.kind) return false;
+    if (st.clubs.length && !st.clubs.includes(r.club)) return false;
+    const L = parseFloat(st.level);
+    if (Number.isFinite(L) && r.level) { const [lo, hi] = r.level.split('–').map(Number); if (L < lo || L > hi) return false; }
+    return r.b < r.x;
+  }
+
+  function setStatus(kind, html) { $('status').className = 'status' + (kind ? ' ' + kind : ''); $('statusText').innerHTML = html; $('refresh')?.addEventListener('click', () => load(true)); }
+  function syncChips() {
+    document.querySelectorAll('#fKind button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === st.kind)));
+    document.querySelectorAll('#fClub button').forEach(b => b.setAttribute('aria-pressed', String(st.clubs.length ? st.clubs.includes(b.dataset.v) : b.dataset.v === '')));
+    $('myLevel').value = st.level;
+  }
+
+  function render() {
+    syncChips();
+    if (!data) return;
+    const now = ukNow();
+    const rows = data.rows.filter(r => `${r.d} ${r.t}` >= now.stamp && fits(r));
+    const nx = rows[0], ne = $('next');
+    if (nx) {
+      ne.className = 'next';
+      const when = nx.d === now.date ? 'Today' : dayName(nx.d, { weekday: 'short', day: 'numeric', month: 'short' });
+      ne.innerHTML = `<div class="when">${esc(nx.t)}</div><div class="eyebrow">Next ${nx.kind === 'social' ? 'social' : 'class'} with a place · ${esc(when)}</div>
+        <div class="what">${esc(nx.club)} · <a href="${esc(nx.url)}" target="_blank" rel="noopener">${esc(nx.n)}</a> · ${esc(places(nx).label)} · ${esc(nx.price)}</div>`;
+    } else { ne.className = 'next none'; ne.textContent = 'Nothing with a place matches these filters.'; }
+    const dates = [...new Set(rows.map(r => r.d))];
+    $('list').innerHTML = rows.length ? dates.map(d => {
+      const rs = rows.filter(r => r.d === d);
+      return `<section class="daysec"><h2>${esc((d === now.date ? 'Today · ' : '') + dayName(d, { weekday: 'long', day: 'numeric', month: 'short' }))}<small>${rs.length} with places</small></h2>` +
+        rs.map(r => { const p = places(r); return `<div class="row">
+          <div class="time">${esc(r.t)}<small>${r.m ? r.m + ' min' : ''}</small></div>
+          <div class="info"><div class="name"><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.n)}</a></div>
+            <div class="meta"><span class="kind ${r.kind}">${r.kind === 'social' ? 'Social' : 'Class'}</span><span>${esc(r.club)}</span>${r.level ? `<span>Level ${esc(r.level)}</span>` : ''}${r.coach ? `<span>${esc(r.coach)}</span>` : ''}<a href="${dirUrl(r.club)}" target="_blank" rel="noopener">Directions</a></div></div>
+          <div class="spaces"><span class="pill ${p.k}">${esc(p.label)}</span><span class="bar" aria-hidden="true"><i style="width:${Math.round(100 * r.b / r.x)}%"></i></span><span class="price">${esc(r.price)}</span></div>
+        </div>`; }).join('') + '</section>';
+    }).join('') : '<p class="empty">Nothing matches. Try Both, more clubs, or clear your level.</p>';
+  }
+
+  async function load(fresh) {
+    if (lock && fresh) return;
+    setStatus('', fresh ? 'Refreshing…' : 'Loading…');
+    try {
+      const q = new URLSearchParams(); if (st.picked.length) q.set('clubs', st.picked.join(',')); if (fresh) q.set('fresh', '1');
+      const r = await fetch('/api/feed' + (q.size ? '?' + q : ''), { headers: { 'X-Key': st.key } });
+      if (r.status === 401) { $('lock').hidden = false; $('help').hidden = false; if (st.key) $('key').focus(); setStatus('err', 'Enter your key to open the feed.'); $('next').hidden = true; return; }
+      const j = await r.json();
+      if (!r.ok) { setStatus('err', esc(j.error || 'Something went wrong.')); return; }
+      data = j; $('lock').hidden = true; $('next').hidden = false; if (!helpAsked) $('help').hidden = true;
+      st.picked = j.selected; save();
+      $('pick').textContent = `Choose clubs (${j.selected.length})`;
+      const clubs = j.clubs.filter(c => j.selected.includes(c.slug)).map(c => c.name);
+      st.clubs = st.clubs.filter(c => clubs.includes(c));
+      $('fClub').innerHTML = clubs.length < 2 ? '' : '<button class="chip" type="button" data-v="">All</button>' + clubs.map(c => `<button class="chip" type="button" data-v="${esc(c)}">${esc(c.replace(/^Padel Social /, '').replace(/^Rocks Lane /, ''))}</button>`).join('');
+      const at = new Date(j.at).toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit' });
+      setStatus(j.failed.length ? 'err' : 'live', `${j.rows.length} upcoming with places · read at ${at} ${ukNow().zone}${j.failed.length ? ' · missing: ' + esc(j.failed.join('; ')) : ''} <button class="btn small" id="refresh" type="button">Refresh</button>`);
+      if (fresh) { lock = true; setTimeout(() => { lock = false; }, 60000); }
+      render();
+    } catch (e) { setStatus('err', "Couldn't reach the server. Check your connection."); }
+  }
+
+  $('showHelp').addEventListener('click', e => { e.preventDefault(); helpAsked = true; $('help').hidden = false; $('help').scrollIntoView({ block: 'start' }); });
+  $('lock').addEventListener('submit', e => { e.preventDefault(); st.key = $('key').value.trim(); save(); load(); });
+  $('fKind').addEventListener('click', e => { const b = e.target.closest('button[data-v]'); if (!b) return; st.kind = b.dataset.v; save(); render(); });
+  $('fClub').addEventListener('click', e => {
+    const b = e.target.closest('button[data-v]'); if (!b) return;
+    const v = b.dataset.v;
+    st.clubs = !v ? [] : st.clubs.includes(v) ? st.clubs.filter(c => c !== v) : [...st.clubs, v];
+    save(); render();
+  });
+  $('myLevel').addEventListener('input', e => { st.level = e.target.value; save(); render(); });
+
+  // Club picker: any of the London clubs, up to the server's limit
+  function drawPicks(chosen) {
+    const max = data?.maxClubs || 8, full = chosen.length >= max;
+    $('picks').innerHTML = (data?.clubs || []).map(c => { const on = chosen.includes(c.slug), off = full && !on;
+      return `<label class="${off ? 'off' : ''}"><input type="checkbox" value="${esc(c.slug)}"${on ? ' checked' : ''}${off ? ' disabled' : ''}><span>${esc(c.name)} <small>${esc(c.area)}</small></span></label>`; }).join('');
+    $('pickCount').textContent = `${chosen.length} of ${max} chosen`;
+    $('pickApply').disabled = !chosen.length;
+  }
+  const chosenNow = () => [...document.querySelectorAll('#picks input:checked')].map(i => i.value);
+  $('pick').addEventListener('click', () => {
+    if (!data) return;
+    const open = $('picker').hidden; $('picker').hidden = !open; $('pick').setAttribute('aria-expanded', String(open));
+    if (open) { drawPicks(st.picked); $('picker').scrollIntoView({ block: 'nearest' }); }
+  });
+  $('picks').addEventListener('change', () => drawPicks(chosenNow()));
+  $('pickCancel').addEventListener('click', () => { $('picker').hidden = true; $('pick').setAttribute('aria-expanded', 'false'); });
+  $('pickApply').addEventListener('click', () => {
+    st.picked = chosenNow(); st.clubs = []; save();
+    $('picker').hidden = true; $('pick').setAttribute('aria-expanded', 'false'); load();
+  });
+  setInterval(render, 60000);
+  load();
+})();
+</script>
+<script>
+// Theme switcher: Auto (follows the phone), Light or Dark. Remembered on this device only.
+(() => {
+  const root = document.documentElement, metas = [...document.querySelectorAll('meta[name="theme-color"]')];
+  const defaults = metas.map(m => m.content), BAR = { light: '#EEF2F5', dark: '#0C151E' };
+  function apply(t) {
+    if (t === 'light' || t === 'dark') root.dataset.theme = t; else delete root.dataset.theme;
+    metas.forEach((m, i) => { m.content = BAR[t] || defaults[i]; });
+    document.querySelectorAll('#theme button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.t === (BAR[t] ? t : 'auto'))));
+  }
+  let saved = 'auto'; try { saved = localStorage.getItem('theme') || 'auto'; } catch (e) {}
+  apply(saved);
+  document.getElementById('theme').addEventListener('click', e => {
+    const b = e.target.closest('button[data-t]'); if (!b) return;
+    try { if (b.dataset.t === 'auto') localStorage.removeItem('theme'); else localStorage.setItem('theme', b.dataset.t); } catch (e) {}
+    apply(b.dataset.t);
+  });
+})();
+</script>
+</body>
+</html>
