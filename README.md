@@ -2,6 +2,8 @@
 
 **Every padel social, americano and group class that still has a free place, at the London Playtomic clubs you choose, on one page.** Your own private copy, free, in about five minutes.
 
+> **Heads-up:** Playtomic hasn't approved third-party tools that read its website, and says automated access may be limited or blocked, so Padel Socials may stop working at any time.
+
 [![Deploy your own copy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fxternal%2Fpadel-socials&project-name=padel-socials&repository-name=padel-socials&env=PADEL_KEY&envDescription=Make%20up%20a%20long%20password.%20You%20type%20it%20once%20on%20your%20phone%20to%20open%20your%20feed.&envLink=https%3A%2F%2Fgithub.com%2Fxternal%2Fpadel-socials%23your-key)
 
 <a href="https://ko-fi.com/pavelg"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" height="56" alt="Buy me a coffee on Ko-fi"></a>
@@ -64,7 +66,7 @@ Playtomic's terms allow personal, non-commercial use of their website. Each copy
 - don't turn it into a public or paid service,
 - leave the caching in place so a copy asks Playtomic for each club at most every few minutes.
 
-Padel Socials is not affiliated with, endorsed by or connected to Playtomic.
+Padel Socials is not affiliated with, endorsed by or connected to Playtomic. Playtomic hasn't approved third-party tools that read its website, and says automated access may be limited or blocked, so Padel Socials may stop working at any time.
 
 ## FAQ
 

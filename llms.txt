@@ -17,7 +17,7 @@ Made by Pavel Guzhikov (https://guzh.uk). Code: https://github.com/xternal/padel
 2. When Vercel asks for PADEL_KEY, make up a long password.
 3. Open your new site and type that password once. Choose your clubs and level.
 
-Each copy is for its owner's personal, non-commercial use, as Playtomic's terms allow. It does not book anything.
+Each copy is for its owner's personal, non-commercial use, as Playtomic's terms allow. It does not book anything. Playtomic hasn't approved third-party tools that read its website, and says automated access may be limited or blocked, so Padel Socials may stop working at any time.
 
 ## Links
 
