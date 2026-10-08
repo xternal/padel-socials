@@ -351,6 +351,10 @@ footer p { margin: 0; }
       const j = await r.json();
       if (!r.ok) { setStatus('err', esc(j.error || 'Something went wrong.')); return; }
       data = j; $('lock').hidden = true; $('next').hidden = false; if (!helpAsked) $('help').hidden = true;
+      // A club newly marked as default in clubs.json is added once on every device; clubs you untick stay unticked
+      const seen = st.seenDefaults || st.picked, added = (j.defaults || []).filter(s => !seen.includes(s) && !j.selected.includes(s));
+      st.seenDefaults = j.defaults || [];
+      if (added.length && st.picked.length && j.selected.length < j.maxClubs) { st.picked = [...j.selected, ...added].slice(0, j.maxClubs); save(); return load(); }
       st.picked = j.selected; save();
       $('pick').textContent = `Choose clubs (${j.selected.length})`;
       const clubs = j.clubs.filter(c => j.selected.includes(c.slug)).map(c => c.name);

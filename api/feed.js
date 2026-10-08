@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   const picked = asked.length ? CLUBS.filter(c => asked.includes(c.slug)).slice(0, MAX_CLUBS) : DEFAULT_CLUBS;
   try {
     const out = await feed(picked, { fresh: req.query.fresh === '1' });
-    res.status(200).json({ ...out, selected: picked.map(c => c.slug), maxClubs: MAX_CLUBS,
+    res.status(200).json({ ...out, selected: picked.map(c => c.slug), defaults: DEFAULT_CLUBS.map(c => c.slug), maxClubs: MAX_CLUBS,
       clubs: CLUBS.map(({ slug, name, area }) => ({ slug, name, area })) });
   } catch (e) {
     res.status(502).json({ error: `Playtomic didn't answer (${e.message}).` });

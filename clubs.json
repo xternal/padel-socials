@@ -18,6 +18,12 @@
   "default": true
  },
  {
+  "slug": "battersea-park-millennium-arena",
+  "name": "Battersea Park Millennium Arena",
+  "area": "SW11",
+  "default": true
+ },
+ {
   "slug": "bannatyne-grove-park",
   "name": "Bannatyne Grove Park",
   "area": "SE12"
@@ -26,11 +32,6 @@
   "slug": "barn-elms-sports-centre",
   "name": "Barn Elms Sports Centre",
   "area": "SW13"
- },
- {
-  "slug": "battersea-park-millennium-arena",
-  "name": "Battersea Park Millennium Arena",
-  "area": "SW11"
  },
  {
   "slug": "catford-padel-collective",
