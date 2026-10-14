@@ -64,14 +64,15 @@
 }
 </script>
 <meta name="theme-color" content="#EEF2F5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0C151E" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#241f1a" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%23DDF24B'/%3E%3Cpath d='M6 9c6 3 6 11 0 14M26 9c-6 3-6 11 0 14' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Saira+Condensed:wght@500;600;700&display=swap">
 <script>/* apply the saved theme before first paint */try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 <style>
-/* Layout: the same court-side scoreboard as Where to Padel. Next open spot, filters, then one ruled list per day. */
+/* Dark mode is Pavel's dark brown, never navy or black; test/contrast.test.mjs checks it.
+   Layout: the same court-side scoreboard as Where to Padel. Next open spot, filters, then one ruled list per day. */
 :root {
   --bg: #EEF2F5; --surface: #FFFFFF; --ink: #102131; --muted: #586A7A; --line: #D5DEE5;
   --accent: #1B5DA6; --accent-ink: #FFFFFF; --ball: #DDF24B; --ball-ink: #1A2600;
@@ -81,13 +82,16 @@
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #0C151E; --surface: #13202B; --ink: #E4ECF2; --muted: #93A4B3; --line: #233342;
-  --accent: #6EA6EC; --accent-ink: #0C151E; --ball: #D6EE48; --ball-ink: #1A2600;
-  --open: #4CC483; --last: #F0A247; --bar-off: #2A3A49; --warn: #F08A6A; --social: #B794E6; color-scheme: dark } }
+  --bg: #241f1a; --surface: #2e2822; --ink: #efe7da; --muted: #c0b5a4; --line: rgba(239,231,218,.16);
+  --accent: #e2b26f; --accent-ink: #241f1a; --ball: #d4e157; --ball-ink: #1A2600;
+  --open: #8cc98f; --last: #ea8a55; --bar-off: #463d34; --warn: #ec9286; --social: #d0a2d8; color-scheme: dark } }
 :root[data-theme="dark"] {
-  --bg: #0C151E; --surface: #13202B; --ink: #E4ECF2; --muted: #93A4B3; --line: #233342;
-  --accent: #6EA6EC; --accent-ink: #0C151E; --ball: #D6EE48; --ball-ink: #1A2600;
-  --open: #4CC483; --last: #F0A247; --bar-off: #2A3A49; --warn: #F08A6A; --social: #B794E6; color-scheme: dark }
+  --bg: #241f1a; --surface: #2e2822; --ink: #efe7da; --muted: #c0b5a4; --line: rgba(239,231,218,.16);
+  --accent: #e2b26f; --accent-ink: #241f1a; --ball: #d4e157; --ball-ink: #1A2600;
+  --open: #8cc98f; --last: #ea8a55; --bar-off: #463d34; --warn: #ec9286; --social: #d0a2d8; color-scheme: dark }
+/* Plain links take the amber in dark mode; the browser's own dark link colour is a cold blue */
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) :is(.help dd, footer p) a { color: var(--accent); } }
+:root[data-theme="dark"] :is(.help dd, footer p) a { color: var(--accent); }
 
 * { box-sizing: border-box; }
 html { padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); background: var(--bg); }
@@ -473,7 +477,7 @@ footer p { margin: 0; }
 // Theme switcher: Auto (follows the phone), Light or Dark. Remembered on this device only.
 (() => {
   const root = document.documentElement, metas = [...document.querySelectorAll('meta[name="theme-color"]')];
-  const defaults = metas.map(m => m.content), BAR = { light: '#EEF2F5', dark: '#0C151E' };
+  const defaults = metas.map(m => m.content), BAR = { light: '#EEF2F5', dark: '#241f1a' };
   function apply(t) {
     if (t === 'light' || t === 'dark') root.dataset.theme = t; else delete root.dataset.theme;
     metas.forEach((m, i) => { m.content = BAR[t] || defaults[i]; });
