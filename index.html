@@ -143,9 +143,15 @@ button { cursor: pointer; }
 .lock { display: flex; flex-wrap: wrap; gap: 8px; }
 .lock input { flex: 1 1 200px; min-width: 0; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
 .status { display: flex; align-items: center; gap: 8px; font-size: .84rem; color: var(--muted); flex-wrap: wrap; }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex: none; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex: none; align-self: flex-start; margin-top: .45em; }
+#statusText { flex: 1 1 0; min-width: 0; }
 .status.live .dot { background: var(--open); }
 .status.err { color: var(--warn); } .status.err .dot { background: var(--warn); }
+.status.old .dot { background: var(--last); }
+.spin { display: inline-block; width: .85em; height: .85em; margin-right: 6px; vertical-align: -.1em; border: 2px solid currentColor;
+  border-right-color: transparent; border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation-duration: 2.4s; } }
 
 .next { background: var(--ball); color: var(--ball-ink); border-radius: 10px; padding: 14px 16px;
   display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; align-items: center; }
@@ -291,11 +297,24 @@ footer p { margin: 0; }
   const st = Object.assign({ kind: 'all', clubs: [], level: '', key: '', picked: [] }, saved);
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
   let data = null, lock = false, helpAsked = location.hash === '#help';
+  // The last good list for each club, so a slow or failed read from Playtomic still shows something
+  const FEED = 'padel-socials-feed', WEEK = 7 * 864e5;
+  const mem = (() => { try { return JSON.parse(localStorage.getItem(FEED)) || {}; } catch (e) { return {}; } })();
+  mem.by = mem.by || {};
+  const keep = () => { try { localStorage.setItem(FEED, JSON.stringify(mem)); } catch (e) {} };
+  const forget = () => { mem.by = {}; delete mem.meta; try { localStorage.removeItem(FEED); } catch (e) {} };
+  const SPIN = '<span class="spin" aria-hidden="true"></span>';
+  const byTime = (a, z) => (a.d + a.t).localeCompare(z.d + z.t);
+  let line = '', lineKind = '';   // what the status line says about the list on screen
 
   const ukNow = () => {
     const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit',
       day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZoneName: 'short' }).formatToParts(new Date()).map(x => [x.type, x.value]));
     return { stamp: `${p.year}-${p.month}-${p.day} ${p.hour}:${p.minute}`, date: `${p.year}-${p.month}-${p.day}`, hm: `${p.hour}:${p.minute}`, zone: p.timeZoneName };
+  };
+  const at = iso => {   // "08:40", or "Tue 21:30" for an earlier day, in UK time
+    const o = { timeZone: 'Europe/London' }, d = new Date(iso), t = d.toLocaleTimeString('en-GB', { ...o, hour: '2-digit', minute: '2-digit' });
+    return d.toLocaleDateString('en-CA', o) === ukNow().date ? t : `${d.toLocaleDateString('en-GB', { ...o, weekday: 'short' })} ${t}`;
   };
   const dayName = (d, opt) => new Date(d + 'T12:00:00Z').toLocaleDateString('en-GB', { timeZone: 'UTC', ...opt });
   const areaOf = name => (data?.clubs || []).find(c => c.name === name)?.area || 'London';
@@ -309,7 +328,21 @@ footer p { margin: 0; }
     return r.b < r.x;
   }
 
-  function setStatus(kind, html) { $('status').className = 'status' + (kind ? ' ' + kind : ''); $('statusText').innerHTML = html; $('refresh')?.addEventListener('click', () => load(true)); }
+  // button: 'refresh' (default), 'busy' while Playtomic is being read, or '' for none
+  function setStatus(kind, html, button = 'refresh') {
+    $('status').className = 'status' + (kind ? ' ' + kind : '');
+    $('statusText').innerHTML = html + (button === 'busy' ? ` <button class="btn small" type="button" disabled aria-busy="true">${SPIN}Reading Playtomic…</button>`
+      : button ? ' <button class="btn small" id="refresh" type="button">Refresh</button>' : '');
+    $('refresh')?.addEventListener('click', () => load(true));
+  }
+  const upcoming = () => { const now = ukNow().stamp; return data.rows.filter(r => `${r.d} ${r.t}` >= now && r.b < r.x).length; };
+  function setClubs(j) {
+    $('pick').textContent = `Choose clubs (${j.selected.length})`;
+    const clubs = j.clubs.filter(c => j.selected.includes(c.slug)).map(c => c.name);
+    st.clubs = st.clubs.filter(c => clubs.includes(c));
+    $('fClub').innerHTML = clubs.length < 2 ? '' : '<button class="chip" type="button" data-v="">All</button>' + clubs.map(c => `<button class="chip" type="button" data-v="${esc(c)}">${esc(c.replace(/^Padel Social /, '').replace(/^Rocks Lane /, ''))}</button>`).join('');
+  }
+  function showFeed() { $('lock').hidden = true; $('next').hidden = false; if (!helpAsked) $('help').hidden = true; }
   function syncChips() {
     document.querySelectorAll('#fKind button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === st.kind)));
     document.querySelectorAll('#fClub button').forEach(b => b.setAttribute('aria-pressed', String(st.clubs.length ? st.clubs.includes(b.dataset.v) : b.dataset.v === '')));
@@ -343,32 +376,65 @@ footer p { margin: 0; }
 
   async function load(fresh) {
     if (lock && fresh) return;
-    setStatus('', fresh ? 'Refreshing…' : 'Loading…');
+    if (data) setStatus(lineKind, line, 'busy');
+    else setStatus('', `${SPIN}Reading Playtomic… On a slow day this takes up to a minute.`, '');
     try {
       const q = new URLSearchParams(); if (st.picked.length) q.set('clubs', st.picked.join(',')); if (fresh) q.set('fresh', '1');
       const r = await fetch('/api/feed' + (q.size ? '?' + q : ''), { headers: { 'X-Key': st.key } });
-      if (r.status === 401) { $('lock').hidden = false; $('help').hidden = false; if (st.key) $('key').focus(); setStatus('err', 'Enter your key to open the feed.'); $('next').hidden = true; return; }
-      const j = await r.json();
-      if (!r.ok) { setStatus('err', esc(j.error || 'Something went wrong.')); return; }
-      data = j; $('lock').hidden = true; $('next').hidden = false; if (!helpAsked) $('help').hidden = true;
+      if (r.status === 401) {
+        forget(); data = null; $('list').innerHTML = ''; $('next').hidden = true;
+        $('lock').hidden = false; $('help').hidden = false; if (st.key) $('key').focus(); setStatus('err', 'Enter your key to open the feed.', ''); return;
+      }
+      const j = await r.json().catch(() => null);
+      if (!r.ok || !j) throw new Error(j?.error || (r.status === 504 ? 'Playtomic took too long to answer.' : 'Something went wrong.'));
       // A club newly marked as default in clubs.json is added once on every device; clubs you untick stay unticked
       const seen = st.seenDefaults || st.picked, added = (j.defaults || []).filter(s => !seen.includes(s) && !j.selected.includes(s));
       st.seenDefaults = j.defaults || [];
       if (added.length && st.picked.length && j.selected.length < j.maxClubs) { st.picked = [...j.selected, ...added].slice(0, j.maxClubs); save(); return load(); }
       st.picked = j.selected; save();
-      $('pick').textContent = `Choose clubs (${j.selected.length})`;
-      const clubs = j.clubs.filter(c => j.selected.includes(c.slug)).map(c => c.name);
-      st.clubs = st.clubs.filter(c => clubs.includes(c));
-      $('fClub').innerHTML = clubs.length < 2 ? '' : '<button class="chip" type="button" data-v="">All</button>' + clubs.map(c => `<button class="chip" type="button" data-v="${esc(c)}">${esc(c.replace(/^Padel Social /, '').replace(/^Rocks Lane /, ''))}</button>`).join('');
-      const at = new Date(j.at).toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit' });
-      setStatus(j.failed.length ? 'err' : 'live', `${j.rows.length} upcoming with places · read at ${at} ${ukNow().zone}${j.failed.length ? ' · missing: ' + esc(j.failed.join('; ')) : ''} <button class="btn small" id="refresh" type="button">Refresh</button>`);
+      // Remember every club that answered; fill in each club that didn't with the last list this phone saw for it
+      const missing = j.missing || [];
+      for (const s of j.selected) if (!missing.some(m => m.slug === s)) mem.by[s] = { at: j.at, rows: j.rows.filter(r => r.slug === s) };
+      for (const s in mem.by) if (Date.now() - Date.parse(mem.by[s].at) > WEEK) delete mem.by[s];
+      mem.meta = { clubs: j.clubs, defaults: j.defaults, maxClubs: j.maxClubs }; keep();
+      const old = missing.filter(m => mem.by[m.slug]), lost = missing.filter(m => !mem.by[m.slug]);
+      data = { ...j, rows: [...j.rows, ...old.flatMap(m => mem.by[m.slug].rows)].sort(byTime) };
+      showFeed(); setClubs(j);
+      const zone = ukNow().zone, answered = j.selected.length - missing.length, oldest = at(old.map(m => mem.by[m.slug].at).sort()[0]);
+      line = `${upcoming()} upcoming with places` + (answered ? ` · read at ${at(j.at)} ${zone}` : '');
+      if (old.length) line += answered
+        ? ` · Playtomic was too slow for ${old.map(m => esc(m.name)).join(', ')}, so ${old.length > 1 ? 'they show their' : 'it shows its'} list from ${oldest}`
+        : ` · Playtomic was too slow just now, so this is the list from ${oldest} ${zone}`;
+      if (lost.length) line += ` · missing: ${lost.map(m => `${esc(m.name)} (${esc(m.error)})`).join('; ')}`;
+      lineKind = lost.length ? 'err' : old.length ? 'old' : 'live';
+      setStatus(lineKind, line);
       if (fresh) { lock = true; setTimeout(() => { lock = false; }, 60000); }
       render();
-    } catch (e) { setStatus('err', "Couldn't reach the server. Check your connection."); }
+    } catch (e) {
+      const why = e instanceof TypeError ? "Couldn't reach the server. Check your connection." : esc(e.message);
+      setStatus('err', data ? `${why} Still showing: ${line}` : why);
+    }
+  }
+
+  // Open straight away with the last list this phone saw, then read Playtomic for changes
+  function fromMemory() {
+    const have = st.picked.filter(s => mem.by[s]);
+    if (!st.key || !mem.meta || !have.length) return;
+    data = { ...mem.meta, selected: st.picked, rows: have.flatMap(s => mem.by[s].rows).sort(byTime) };
+    showFeed(); setClubs(data);
+    line = `${upcoming()} upcoming with places · list from ${at(have.map(s => mem.by[s].at).sort()[0])} ${ukNow().zone}`; lineKind = 'old';
+    render();
   }
 
   $('showHelp').addEventListener('click', e => { e.preventDefault(); helpAsked = true; $('help').hidden = false; $('help').scrollIntoView({ block: 'start' }); });
-  $('lock').addEventListener('submit', e => { e.preventDefault(); st.key = $('key').value.trim(); save(); load(); });
+  $('lock').addEventListener('submit', async e => {
+    e.preventDefault(); st.key = $('key').value.trim(); save();
+    const b = $('lock').querySelector('button'); b.disabled = true; b.setAttribute('aria-busy', 'true'); b.innerHTML = SPIN + 'Opening…';
+    await load();
+    b.disabled = false; b.removeAttribute('aria-busy'); b.textContent = 'Open';
+  });
+  // A page brought back with Back never keeps a spinning button
+  addEventListener('pageshow', e => { if (e.persisted) location.reload(); });
   $('fKind').addEventListener('click', e => { const b = e.target.closest('button[data-v]'); if (!b) return; st.kind = b.dataset.v; save(); render(); });
   $('fClub').addEventListener('click', e => {
     const b = e.target.closest('button[data-v]'); if (!b) return;
@@ -399,6 +465,7 @@ footer p { margin: 0; }
     $('picker').hidden = true; $('pick').setAttribute('aria-expanded', 'false'); load();
   });
   setInterval(render, 60000);
+  fromMemory();
   load();
 })();
 </script>

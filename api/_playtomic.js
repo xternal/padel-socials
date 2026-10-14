@@ -115,10 +115,16 @@ export function parseCards(html, club, now = ukNow()) {
   return rows.filter(r => r.d && `${r.d} ${r.t}` >= now.stamp && Number.isFinite(r.b) && Number.isFinite(r.x));
 }
 
+// On a slow day Playtomic takes 20-40 s to build a club page, so wait up to 50 s (the function may run 60 s)
+const WAIT = 50e3;
 async function page(url) {
-  const r = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'text/html' }, signal: AbortSignal.timeout(20000) });
-  if (!r.ok) throw new Error(`${new URL(url).pathname} answered ${r.status}`);
-  return r.text();
+  try {
+    const r = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'text/html' }, signal: AbortSignal.timeout(WAIT) });
+    if (!r.ok) throw new Error(`${new URL(url).pathname} answered ${r.status}`);
+    return await r.text();
+  } catch (e) {
+    throw e.name === 'TimeoutError' ? new Error(`Playtomic took over ${WAIT / 1e3} s to answer`) : e;
+  }
 }
 
 // Every club's classes and socials. Failed pages are reported, not fatal.
@@ -136,13 +142,13 @@ async function clubRows(c, fresh) {
   return rows;
 }
 
-// Classes and socials with places at the given clubs. A club that fails is reported, not fatal.
+// Classes and socials with places at the given clubs. A club that fails is listed in `missing`, not fatal.
 export async function feed(clubs = DEFAULT_CLUBS, { fresh = false } = {}) {
-  const failed = [], rows = [];
+  const missing = [], rows = [];
   await Promise.all(clubs.slice(0, MAX_CLUBS).map(async c => {
-    try { rows.push(...await clubRows(c, fresh)); } catch (e) { failed.push(`${c.name}: ${e.message}`); }
+    try { rows.push(...await clubRows(c, fresh)); } catch (e) { missing.push({ slug: c.slug, name: c.name, error: e.message }); }
   }));
   const seen = new Set();
-  return { at: new Date().toISOString(), failed,
+  return { at: new Date().toISOString(), missing,
     rows: rows.filter(r => !seen.has(r.url + r.d + r.t) && seen.add(r.url + r.d + r.t)).sort((a, z) => (a.d + a.t).localeCompare(z.d + z.t)) };
 }

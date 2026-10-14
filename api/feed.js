@@ -4,7 +4,7 @@
 import { timingSafeEqual } from 'node:crypto';
 import { feed, CLUBS, DEFAULT_CLUBS, MAX_CLUBS } from './_playtomic.js';
 
-export const config = { maxDuration: 30 };
+export const config = { maxDuration: 60 };    // Playtomic can take 40 s to build a club page
 
 function allowed(req) {
   const want = process.env.PADEL_KEY || '', got = String(req.headers['x-key'] || '');

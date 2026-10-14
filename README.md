@@ -55,8 +55,8 @@ The clubs live in [`clubs.json`](clubs.json). Each one needs the `slug` from its
 
 - Two public pages per club: `playtomic.com/clubs/<slug>/academy/public-classes` and `playtomic.com/clubs/<slug>/competitions/tournaments`. Neither is blocked in Playtomic's `robots.txt`.
 - Those pages are built with Next.js server components, so part of each card is only in the page's embedded component stream (`self.__next_f`). [`api/_playtomic.js`](api/_playtomic.js) decodes that stream so every card is complete.
-- [`api/feed.js`](api/feed.js) is a Vercel serverless function. It checks your key, reads the clubs you picked (up to 8), keeps each club's result for 5 minutes, and returns only events with places.
-- [`index.html`](index.html) is a single static page with no framework and no build step.
+- [`api/feed.js`](api/feed.js) is a Vercel serverless function. It checks your key, reads the clubs you picked (up to 8), keeps each club's result for 5 minutes, and returns only events with places. On a slow day Playtomic takes 20–40 seconds to build a club page, so it waits up to 50 seconds per page.
+- [`index.html`](index.html) is a single static page with no framework and no build step. Your phone keeps the last good list for each club, so the page opens at once and still shows something (marked with the time it was read) when Playtomic is too slow to answer.
 
 ## Fair use
 
