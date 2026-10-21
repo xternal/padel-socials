@@ -6,7 +6,7 @@
 
 [![Deploy your own copy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fxternal%2Fpadel-socials&project-name=padel-socials&repository-name=padel-socials&env=PADEL_KEY&envDescription=Make%20up%20a%20long%20password.%20You%20type%20it%20once%20on%20your%20phone%20to%20open%20your%20feed.&envLink=https%3A%2F%2Fgithub.com%2Fxternal%2Fpadel-socials%23your-key)
 
-<a href="https://ko-fi.com/pavelg"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" height="56" alt="Buy me a coffee on Ko-fi"></a>
+<a href="https://ko-fi.com/pavelg"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" height="56" alt="Buy me a matcha on Ko-fi"></a>
 
 ![Padel Socials: London padel socials and classes with free places](og.png)
 
@@ -82,9 +82,9 @@ Padel Socials is not affiliated with, endorsed by or connected to Playtomic. Pla
 
 ## Support
 
-If Padel Socials saved you some scrolling, a coffee keeps it going:
+If Padel Socials saved you some scrolling, a matcha keeps it going:
 
-<a href="https://ko-fi.com/pavelg"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" height="56" alt="Buy me a coffee on Ko-fi"></a>
+<a href="https://ko-fi.com/pavelg"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" height="56" alt="Buy me a matcha on Ko-fi"></a>
 
 Ideas, bugs or a club to add: **ideas@guzh.uk**
 
