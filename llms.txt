@@ -2,7 +2,7 @@
 
 > A free, self-hosted web page that shows every padel social, americano and group class with a free place at the London Playtomic clubs you choose, sorted by time. Each copy is private to the person who deploys it.
 
-Made by Pavel Guzhikov (https://guzh.uk). Code: https://github.com/xternal/padel-socials (MIT licence). Not affiliated with Playtomic.
+Updated: 2026-11-19. Made by Pavel Guzhikov (https://guzh.uk). Code: https://github.com/xternal/padel-socials (MIT licence). Not affiliated with Playtomic.
 
 ## What it does
 
@@ -18,6 +18,13 @@ Made by Pavel Guzhikov (https://guzh.uk). Code: https://github.com/xternal/padel
 3. Open your new site and type that password once. Choose your clubs and level.
 
 Each copy is for its owner's personal, non-commercial use, as Playtomic's terms allow. It does not book anything. Playtomic hasn't approved third-party tools that read its website, and says automated access may be limited or blocked, so Padel Socials may stop working at any time.
+
+## Questions
+
+- **Does it book for me?** No. Each event opens in Playtomic, where you book as usual.
+- **Why does everyone need their own copy?** Playtomic's terms allow personal, non-commercial use, so each copy reads the public club pages for its owner alone.
+- **Is it approved by Playtomic?** No, and it may stop working at any time.
+- **What does it cost?** Nothing: free GitHub and Vercel accounts are enough. The code is MIT-licensed.
 
 ## Links
 

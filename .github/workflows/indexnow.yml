@@ -1,0 +1,24 @@
+# Tell Bing (and through it ChatGPT and Copilot search) and the other IndexNow engines that the
+# landing page changed, each time Vercel finishes a production deploy.
+# Only the original repo pings: copies people deploy for themselves are private feeds.
+name: IndexNow
+on: deployment_status
+permissions: {}
+jobs:
+  ping:
+    if: >-
+      github.repository == 'xternal/padel-socials' &&
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment.environment == 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping IndexNow
+        env:
+          HOST: padel-socials.vercel.app
+          KEY: 0fa9ab6333b6d72d42aebc3fd33048c3   # public by design; the same value is served at /0fa9ab6333b6d72d42aebc3fd33048c3.txt
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            -d "{\"host\":\"$HOST\",\"key\":\"$KEY\",\"keyLocation\":\"https://$HOST/$KEY.txt\",\"urlList\":[\"https://$HOST/\",\"https://$HOST/llms.txt\"]}")
+          echo "IndexNow answered $code"
+          case "$code" in 200|202) ;; *) exit 1 ;; esac

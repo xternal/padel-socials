@@ -41,7 +41,33 @@
       "about": [{ "@type": "Thing", "name": "Padel" }, { "@type": "Thing", "name": "Americano (padel format)" }],
       "author": { "@id": "https://guzh.uk/#person" },
       "codeRepository": "https://github.com/xternal/padel-socials",
-      "license": "https://opensource.org/licenses/MIT"
+      "license": "https://opensource.org/licenses/MIT",
+      "inLanguage": "en-GB",
+      "datePublished": "2026-10-06",
+      "dateModified": "2026-11-19",
+      "image": "https://padel-socials.vercel.app/og.png"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://padel-socials.vercel.app/#website",
+      "name": "Padel Socials",
+      "url": "https://padel-socials.vercel.app/",
+      "description": "Padel socials, americanos and group classes with free places at London Playtomic clubs, in one private feed you deploy yourself.",
+      "inLanguage": "en-GB",
+      "publisher": { "@id": "https://guzh.uk/#person" },
+      "dateModified": "2026-11-19"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://padel-socials.vercel.app/#webpage",
+      "url": "https://padel-socials.vercel.app/",
+      "name": "Padel Socials · London padel socials, americanos and classes with free places",
+      "isPartOf": { "@id": "https://padel-socials.vercel.app/#website" },
+      "about": { "@id": "https://padel-socials.vercel.app/#app" },
+      "primaryImageOfPage": "https://padel-socials.vercel.app/og.png",
+      "inLanguage": "en-GB",
+      "datePublished": "2026-10-06",
+      "dateModified": "2026-11-19"
     },
     {
       "@type": "Person",
@@ -53,11 +79,13 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "What is Padel Socials?", "acceptedAnswer": { "@type": "Answer", "text": "A one-page feed of padel socials, americanos and group classes that still have free places at the London Playtomic clubs you choose, sorted by time, with level, price and a link to book in Playtomic." } },
-        { "@type": "Question", "name": "How do I get my own Padel Socials?", "acceptedAnswer": { "@type": "Answer", "text": "Use the Deploy to Vercel button on padel-socials.vercel.app or github.com/xternal/padel-socials, sign in with GitHub, make up a password for PADEL_KEY, then open your new site and type that password once. It is free and takes about five minutes." } },
-        { "@type": "Question", "name": "Which clubs does it cover?", "acceptedAnswer": { "@type": "Answer", "text": "The 30 London clubs listed on Playtomic, including Padel Social Club Earls Court, Rocks Lane Chiswick and Barnes, Padel Zest, Padel Play London and S3 Padel. You pick up to 8 at a time." } },
-        { "@type": "Question", "name": "Does it book for me?", "acceptedAnswer": { "@type": "Answer", "text": "No. It only shows what has free places. Each event links to its Playtomic page, where you book as usual." } },
-        { "@type": "Question", "name": "Is it affiliated with Playtomic?", "acceptedAnswer": { "@type": "Answer", "text": "No. Each copy reads Playtomic's public club pages for its owner's personal, non-commercial use. Playtomic hasn't approved third-party tools that read its website and may limit or block them, so it can stop working at any time." } }
+        { "@type": "Question", "name": "What is Padel Socials?", "acceptedAnswer": { "@type": "Answer", "text": "A one-page feed of every padel social, americano and group class that still has a free place at the London Playtomic clubs you choose, sorted by time. Each copy is private to the person who sets it up; it's free and takes about five minutes." } },
+        { "@type": "Question", "name": "How do I get my own Padel Socials?", "acceptedAnswer": { "@type": "Answer", "text": "Tap Deploy your own copy on padel-socials.vercel.app and sign in to Vercel with GitHub (both free). When Vercel asks for PADEL_KEY, make up a long password. When the deploy finishes, open your new site, type that password once, then choose your clubs and level." } },
+        { "@type": "Question", "name": "Which clubs does it cover?", "acceptedAnswer": { "@type": "Answer", "text": "The 30 London clubs on Playtomic, from Padel Social Club Earls Court and Rocks Lane Chiswick to Padel Zest, Padel Play London and S3 Padel. Pick up to 8 at a time." } },
+        { "@type": "Question", "name": "Does it book for me?", "acceptedAnswer": { "@type": "Answer", "text": "No. It shows what has free places; each event opens in Playtomic, where you book as usual." } },
+        { "@type": "Question", "name": "Why do I need my own copy?", "acceptedAnswer": { "@type": "Answer", "text": "Playtomic's terms allow personal, non-commercial use. Your copy reads their public club pages for you alone, so keep its link to yourself." } },
+        { "@type": "Question", "name": "Is it approved by Playtomic?", "acceptedAnswer": { "@type": "Answer", "text": "No. Playtomic hasn't approved third-party tools that read its website and may limit or block them, so this can stop working at any time." } },
+        { "@type": "Question", "name": "Where's the code?", "acceptedAnswer": { "@type": "Answer", "text": "github.com/xternal/padel-socials, free to use under the MIT licence. Ideas or problems: ideas@guzh.uk." } }
       ]
     }
   ]
@@ -68,7 +96,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%23DDF24B'/%3E%3Cpath d='M6 9c6 3 6 11 0 14M26 9c-6 3-6 11 0 14' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Saira+Condensed:wght@500;600;700&display=swap">
+<!-- Fonts load without holding up the first paint; the system fallbacks show until they arrive -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Saira+Condensed:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Saira+Condensed:wght@500;600;700&display=swap"></noscript>
 <script>/* apply the saved theme before first paint */try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 <style>
 /* Dark mode is Pavel's dark brown, never navy or black; test/contrast.test.mjs checks it.
@@ -199,6 +229,7 @@ footer { color: var(--muted); font-size: .8rem; display: grid; gap: 6px; max-wid
 footer p { margin: 0; }
 @media (max-width: 520px) {
   h1 { font-size: 2rem; }
+  .help, footer { font-size: 1rem; }
   .row { grid-template-columns: 54px minmax(0, 1fr); }
   .spaces { grid-column: 2; justify-items: start; text-align: left; display: flex; gap: 10px; align-items: center; }
 }
@@ -243,6 +274,10 @@ footer p { margin: 0; }
     </div>
     <h3>Questions</h3>
     <dl>
+      <dt>What is Padel Socials?</dt>
+      <dd>A one-page feed of every padel social, americano and group class that still has a free place at the London Playtomic clubs you choose, sorted by time, with level, price and a link to book in Playtomic.</dd>
+      <dt>How do I get my own Padel Socials?</dt>
+      <dd>Follow the four steps above: deploy a copy to Vercel, make up a <code>PADEL_KEY</code>, open your new site and type the key once.</dd>
       <dt>Which clubs does it cover?</dt>
       <dd>The 30 London clubs on Playtomic, from Padel Social Club Earls Court and Rocks Lane Chiswick to Padel Zest, Padel Play London and S3 Padel. Pick up to 8 at a time.</dd>
       <dt>Does it book for me?</dt>
@@ -254,7 +289,7 @@ footer p { margin: 0; }
       <dt>Where's the code?</dt>
       <dd><a href="https://github.com/xternal/padel-socials">github.com/xternal/padel-socials</a>, free to use under the MIT licence. Ideas or problems: <a href="mailto:ideas@guzh.uk">ideas@guzh.uk</a>.</dd>
     </dl>
-    <p class="small">Not affiliated with Playtomic.</p>
+    <p class="small">Not affiliated with Playtomic. Updated <time datetime="2026-11-19">19 November 2026</time>.</p>
   </section>
 
   <div class="status" id="status" aria-live="polite"><span class="dot"></span><span id="statusText">Loading…</span></div>
@@ -288,6 +323,7 @@ footer p { margin: 0; }
   <footer>
     <p>Read from Playtomic's public club pages for personal use. Places can go fast: book in the Playtomic app. Full events aren't listed by Playtomic, so everything here has at least one place.</p>
     <p>Want this for yourself? <a href="#help" id="showHelp">Get your own copy</a>, free. Ideas or problems: <a href="mailto:ideas@guzh.uk">ideas@guzh.uk</a></p>
+    <p><a href="https://guzh.uk">Made by Pavel Guzhikov</a></p>
     <a class="coffee big" href="https://ko-fi.com/pavelg" target="_blank" rel="noopener">🍵 Buy me a matcha</a>
   </footer>
 </div>
@@ -378,17 +414,19 @@ footer p { margin: 0; }
     }).join('') : '<p class="empty">Nothing matches. Try Both, more clubs, or clear your level.</p>';
   }
 
+  function showLock() {
+    forget(); data = null; $('list').innerHTML = ''; $('next').hidden = true;
+    $('lock').hidden = false; $('help').hidden = false; if (st.key) $('key').focus(); setStatus('err', 'Enter your key to open the feed.', '');
+  }
   async function load(fresh) {
     if (lock && fresh) return;
+    if (!st.key) { showLock(); return; }   // every copy needs a key, so don't ask the server without one
     if (data) setStatus(lineKind, line, 'busy');
     else setStatus('', `${SPIN}Reading Playtomic… On a slow day this takes up to a minute.`, '');
     try {
       const q = new URLSearchParams(); if (st.picked.length) q.set('clubs', st.picked.join(',')); if (fresh) q.set('fresh', '1');
       const r = await fetch('/api/feed' + (q.size ? '?' + q : ''), { headers: { 'X-Key': st.key } });
-      if (r.status === 401) {
-        forget(); data = null; $('list').innerHTML = ''; $('next').hidden = true;
-        $('lock').hidden = false; $('help').hidden = false; if (st.key) $('key').focus(); setStatus('err', 'Enter your key to open the feed.', ''); return;
-      }
+      if (r.status === 401) { showLock(); return; }
       const j = await r.json().catch(() => null);
       if (!r.ok || !j) throw new Error(j?.error || (r.status === 504 ? 'Playtomic took too long to answer.' : 'Something went wrong.'));
       // A club newly marked as default in clubs.json is added once on every device; clubs you untick stay unticked
