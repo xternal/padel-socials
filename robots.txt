@@ -4,6 +4,7 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
+# Search and AI crawlers, named so each is welcome with the same rules as above.
 User-agent: GPTBot
 Allow: /
 Disallow: /api/
@@ -24,11 +25,23 @@ User-agent: Claude-SearchBot
 Allow: /
 Disallow: /api/
 
+User-agent: Claude-User
+Allow: /
+Disallow: /api/
+
 User-agent: PerplexityBot
 Allow: /
 Disallow: /api/
 
+User-agent: Perplexity-User
+Allow: /
+Disallow: /api/
+
 User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: Applebot-Extended
 Allow: /
 Disallow: /api/
 
